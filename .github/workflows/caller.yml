@@ -1,0 +1,11 @@
+name: caller
+on: workflow_dispatch
+jobs:
+  a:
+    uses: ./.github/workflows/called-declared.yml
+  b:
+    uses: ./.github/workflows/called-undeclared.yml
+  c:
+    uses: ./.github/workflows/called-declared-with-other.yml
+    secrets:
+      other-secret: ${{ secrets.OTHER_DUMMY }}

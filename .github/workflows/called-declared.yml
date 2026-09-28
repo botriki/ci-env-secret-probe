@@ -1,0 +1,14 @@
+name: called-declared
+on:
+  workflow_call:
+    secrets:
+      KUBECONFIG_GITHUB_ACTIONS_DEPLOYER:
+        required: false
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    environment: probe-env
+    steps:
+      - env:
+          VALUE: ${{ secrets.KUBECONFIG_GITHUB_ACTIONS_DEPLOYER }}
+        run: echo "variant=A-declared length=${#VALUE}"

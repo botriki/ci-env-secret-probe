@@ -1,0 +1,17 @@
+name: called-declared-with-other
+on:
+  workflow_call:
+    secrets:
+      other-secret:
+        required: true
+      KUBECONFIG_GITHUB_ACTIONS_DEPLOYER:
+        required: false
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    environment: probe-env
+    steps:
+      - env:
+          VALUE: ${{ secrets.KUBECONFIG_GITHUB_ACTIONS_DEPLOYER }}
+          OTHER: ${{ secrets.other-secret }}
+        run: echo "variant=C-declared-caller-passes-other length=${#VALUE} other_length=${#OTHER}"

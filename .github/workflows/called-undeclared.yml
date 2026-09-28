@@ -1,0 +1,11 @@
+name: called-undeclared
+on:
+  workflow_call: {}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    environment: probe-env
+    steps:
+      - env:
+          VALUE: ${{ secrets.KUBECONFIG_GITHUB_ACTIONS_DEPLOYER }}
+        run: echo "variant=B-undeclared length=${#VALUE}"
