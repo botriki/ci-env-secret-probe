@@ -9,3 +9,16 @@ jobs:
     uses: ./.github/workflows/called-declared-with-other.yml
     secrets:
       other-secret: ${{ secrets.OTHER_DUMMY }}
+  d:
+    uses: ./.github/workflows/called-undeclared.yml
+    secrets: inherit
+  e:
+    uses: ./.github/workflows/called-declared.yml
+    secrets: inherit
+  f:
+    runs-on: ubuntu-latest
+    environment: probe-env
+    steps:
+      - env:
+          VALUE: ${{ secrets.KUBECONFIG_GITHUB_ACTIONS_DEPLOYER }}
+        run: echo "variant=F-direct-job length=${#VALUE}"
