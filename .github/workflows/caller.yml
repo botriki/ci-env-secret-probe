@@ -22,3 +22,13 @@ jobs:
       - env:
           VALUE: ${{ secrets.KUBECONFIG_GITHUB_ACTIONS_DEPLOYER }}
         run: echo "variant=F-direct-job length=${#VALUE}"
+  g:
+    uses: ./.github/workflows/called-declared-with-other.yml
+    secrets:
+      other-secret: ${{ secrets.OTHER_DUMMY }}
+      KUBECONFIG_GITHUB_ACTIONS_DEPLOYER: ${{ secrets.KUBECONFIG_GITHUB_ACTIONS_DEPLOYER }}
+  h:
+    uses: ./.github/workflows/called-declared-with-other.yml
+    secrets:
+      other-secret: ${{ secrets.OTHER_DUMMY }}
+      KUBECONFIG_GITHUB_ACTIONS_DEPLOYER: ${{ secrets.OTHER_DUMMY }}
